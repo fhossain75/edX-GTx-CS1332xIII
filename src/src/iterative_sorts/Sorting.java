@@ -73,7 +73,26 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void selectionSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        int i = arr.length - 1;
+        // Outer loop - iterates through array holding index to place max value
+        while (i > 0) {
+
+            // Inner loop - finds max value in subarray arr[:outerLoopIndex]
+            int maxValueIndex = 0;
+            for(int j = 0; j <= i; j++) {
+
+                if (comparator.compare(arr[j], arr[maxValueIndex]) > 0) {
+                    maxValueIndex = j;
+                }
+            }
+
+            // Swap max value with end
+            T temp = arr[i];
+            arr[i] = arr[maxValueIndex];
+            arr[maxValueIndex] = temp;
+            i--;
+        }
     }
 
     /**
