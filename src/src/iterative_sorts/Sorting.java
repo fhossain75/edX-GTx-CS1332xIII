@@ -96,20 +96,20 @@ public class Sorting {
      */
     public static <T> void insertionSort(T[] arr, Comparator<T> comparator) {
 
-        // Outer Loop - index of left sorted half
+        // Outer Loop - iterate through each index in array
         for (int i = 0; i < arr.length; i++) {
 
-            // Inner loop - swap lefts in left half
-            for (int j = 0; j <= i; j++) {
-
-                // Swap if current value is larger than next
-                if (comparator.compare(arr[j], arr[j + 1]) > 0) {
-                    T temp = arr[j + 1];
-                    arr[j + 1] = arr[j];
+            // Inner loop - place index element correctly in left sorted half
+            int j = i;
+            while(j > 0) {
+                // Swap if current value is smaller than previous
+                if (comparator.compare(arr[j], arr[j - 1]) < 0) {
+                    T temp = arr[j - 1];
+                    arr[j - 1] = arr[j];
                     arr[j] = temp;
                 }
+                j --;
             }
-
         }
     }
 }
