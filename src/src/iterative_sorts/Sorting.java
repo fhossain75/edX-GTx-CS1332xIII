@@ -29,30 +29,50 @@ public class Sorting {
      */
     public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
 
-        // Outer loop to control the number of passes
-        for (int i = 0; i < arr.length; i++) {
+        // Optimize 1: swapMade flag; array is sorted -> outer loop iteration break; optimizes outer-loop
+        // Optimize 2: shorten stop index; right side sorted, reduce amount of comparisons; optimizes inner-loop
 
-            // Flag to track if a swap has been made in this pass
+        int stopIndex = arr.length - 1;
+
+        // Outer loop,
+        while (stopIndex > 0) {
+
+            // Inner loop variables
+            int j = 0;
+            int swapIndex = 0;
             boolean swapMade = false;
 
-            // Inner loop to compare adjacent elements
-            for (int j = 0; j < arr.length - 1; j++) {
+            // Inner loop
+            while (j < stopIndex) {
 
                 // Swap if current value is larger than next
                 if (comparator.compare(arr[j], arr[j + 1]) > 0) {
-                    T temp = arr[j + 1];
-                    arr[j + 1] = arr[j];
-                    arr[j] = temp;
+
+                    // Swap
+                    T temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+
+                    // Update variables
                     swapMade = true;
+                    swapIndex = j;
                 }
+
+                // Increment pointer
+                j++;
             }
 
-            // Optimize runtime
+            // Optimize: End sort early if iteration made no swap
             if (!swapMade) {
                 break;
             }
+            // Optimize: Update stop Index
+            else {
+                stopIndex = swapIndex;
+            }
         }
     }
+
 
     /**
      * Implement selection sort.

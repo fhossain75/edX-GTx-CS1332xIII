@@ -28,7 +28,7 @@ public class SortTests {
             Integer[] expected = {1, 2, 3};
 
             bubbleSort(input, Comparator.naturalOrder());
-            Assertions.assertArrayEquals(expected, input);
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
         }
 
         @Test
@@ -37,7 +37,7 @@ public class SortTests {
             Integer[] expected = {1, 2, 3};
 
             bubbleSort(input, Comparator.naturalOrder());
-            Assertions.assertArrayEquals(expected, input);
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
         }
 
         @Test
