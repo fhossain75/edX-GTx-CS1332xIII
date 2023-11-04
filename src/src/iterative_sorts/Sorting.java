@@ -95,6 +95,21 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void insertionSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        // Outer Loop - index of left sorted half
+        for (int i = 0; i < arr.length; i++) {
+
+            // Inner loop - swap lefts in left half
+            for (int j = 0; j <= i; j++) {
+
+                // Swap if current value is larger than next
+                if (comparator.compare(arr[j], arr[j + 1]) > 0) {
+                    T temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+
+        }
     }
 }
