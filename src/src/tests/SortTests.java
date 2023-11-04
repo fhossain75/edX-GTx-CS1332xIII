@@ -69,7 +69,7 @@ public class SortTests {
 
 
     @Nested
-    public class InsertionSortTests {
+    class InsertionSortTests {
         @Test
         public void testInsertionSort1() {
             Integer[] input = {3, 2, 4};
@@ -83,6 +83,42 @@ public class SortTests {
         public void testInsertionSort2() {
             Integer[] input = {1, 2, 3};
             Integer[] expected = {1, 2, 3};
+
+            insertionSort(input, Comparator.naturalOrder());
+            Assertions.assertArrayEquals(expected, input);
+        }
+
+        @Test
+        public void testInsertionSort3() {
+            Integer[] input = {3, 2, 1};
+            Integer[] expected = {1, 2, 3};
+
+            insertionSort(input, Comparator.naturalOrder());
+            Assertions.assertArrayEquals(expected, input);
+        }
+
+        @Test
+        public void testInsertionSort4() {
+            Integer[] input = {3, 3, 1};
+            Integer[] expected = {1, 3, 3};
+
+            insertionSort(input, Comparator.naturalOrder());
+            Assertions.assertArrayEquals(expected, input);
+        }
+
+        @Test
+        public void testInsertionSort5() {
+            Integer[] input = {-1, 2, 1};
+            Integer[] expected = {-1, 1, 2};
+
+            insertionSort(input, Comparator.naturalOrder());
+            Assertions.assertArrayEquals(expected, input);
+        }
+
+        @Test
+        public void testInsertionSort6() {
+            Integer[] input = {};
+            Integer[] expected = {};
 
             insertionSort(input, Comparator.naturalOrder());
             Assertions.assertArrayEquals(expected, input);
