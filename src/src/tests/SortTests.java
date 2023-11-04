@@ -1,4 +1,5 @@
 package tests;
+import java.util.Arrays;
 import java.util.Comparator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
@@ -18,7 +19,7 @@ public class SortTests {
             Integer[] expected = {2, 3, 4};
 
             bubbleSort(input, Comparator.naturalOrder());
-            Assertions.assertArrayEquals(expected, input);
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
         }
 
         @Test
@@ -85,7 +86,7 @@ public class SortTests {
             Integer[] expected = {1, 2, 3};
 
             insertionSort(input, Comparator.naturalOrder());
-            Assertions.assertArrayEquals(expected, input);
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
         }
 
         @Test
@@ -94,7 +95,7 @@ public class SortTests {
             Integer[] expected = {1, 2, 3};
 
             insertionSort(input, Comparator.naturalOrder());
-            Assertions.assertArrayEquals(expected, input);
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
         }
 
         @Test
