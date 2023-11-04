@@ -74,11 +74,10 @@ public class Sorting {
      */
     public static <T> void selectionSort(T[] arr, Comparator<T> comparator) {
 
-        int i = arr.length - 1;
-        // Outer loop - iterates through array holding index to place max value
-        while (i > 0) {
+        // Outer loop - Iterate backwards, assigning max value to last index
+        for (int i = arr.length - 1; i > 0; i --) {
 
-            // Inner loop - finds max value in subarray arr[:outerLoopIndex]
+            // Inner loop - Find max value in sub-array arr[:outerLoopIndex]
             int maxValueIndex = 0;
             for(int j = 0; j <= i; j++) {
 
@@ -87,11 +86,10 @@ public class Sorting {
                 }
             }
 
-            // Swap max value with end
+            // Swap max value with sub-array's end boundary
             T temp = arr[i];
             arr[i] = arr[maxValueIndex];
             arr[maxValueIndex] = temp;
-            i--;
         }
     }
 
