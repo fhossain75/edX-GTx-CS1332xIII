@@ -28,7 +28,30 @@ public class Sorting {
      * @param comparator The Comparator used to compare the data in arr.
      */
     public static <T> void bubbleSort(T[] arr, Comparator<T> comparator) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        // Outer loop to control the number of passes
+        for (int i = 0; i < arr.length; i++) {
+
+            // Flag to track if a swap has been made in this pass
+            boolean swapMade = false;
+
+            // Inner loop to compare adjacent elements
+            for (int j = 0; j < arr.length - 1; j++) {
+
+                // Swap if current value is larger than next
+                if (comparator.compare(arr[j], arr[j + 1]) > 0) {
+                    T temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+                    swapMade = true;
+                }
+            }
+
+            // Optimize runtime
+            if (!swapMade) {
+                break;
+            }
+        }
     }
 
     /**
