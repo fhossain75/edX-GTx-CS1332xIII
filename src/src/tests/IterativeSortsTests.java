@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IterativeSortsTests {
 
-    private CountingComparator<Integer> comparator;
+    private static CountingComparator<Integer> comparator;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    public static void setUp() {
         comparator = new CountingComparator<>(Integer::compareTo);
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         comparator.resetCount();
     }
 
