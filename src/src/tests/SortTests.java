@@ -1,22 +1,44 @@
 package tests;
 import java.util.Arrays;
 import java.util.Comparator;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Assertions;
 
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.*;
 import static iterative_sorts.Sorting.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+// todo: create test cases to check number of comparisons
 public class SortTests {
+
+    private CountingComparator<Integer> comparator;
+
+    @BeforeEach
+    void setUp() {
+        comparator = new CountingComparator<>(Integer::compareTo);
+    }
+
+    @AfterEach
+    void tearDown() {
+        comparator.resetCount();
+    }
 
     @Nested
     class BubbleSortTests {
 
         @Test
-        public void testBubbleSort1() {
-            Integer[] input = {3, 2, 4};
-            Integer[] expected = {2, 3, 4};
+        public void sortedArrayTest() {
+            Integer[] input = {1, 2, 3};
+            Integer[] expected = {1, 2, 3};
+
+            bubbleSort(input, comparator);
+            assertEquals(2, comparator.getCount());
+            Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
+        }
+
+        @Test
+        public void sortedArrayComparisonsTest() {
+            Integer[] input = {1, 2, 3};
+            Integer[] expected = {1, 2, 3};
 
             bubbleSort(input, Comparator.naturalOrder());
             Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
@@ -24,8 +46,8 @@ public class SortTests {
 
         @Test
         public void testBubbleSort2() {
-            Integer[] input = {1, 2, 3};
-            Integer[] expected = {1, 2, 3};
+            Integer[] input = {3, 2, 4};
+            Integer[] expected = {2, 3, 4};
 
             bubbleSort(input, Comparator.naturalOrder());
             Assertions.assertArrayEquals(expected, input, "Actual: " + Arrays.toString(input) + ", Expected: " + Arrays.toString(expected));
@@ -67,7 +89,6 @@ public class SortTests {
             Assertions.assertArrayEquals(expected, input);
         }
     }
-
 
     @Nested
     class InsertionSortTests {
@@ -183,3 +204,4 @@ public class SortTests {
         }
     }
 }
+
