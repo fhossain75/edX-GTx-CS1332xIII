@@ -42,7 +42,7 @@ public class Sorting {
         // Recursively split array into 2
 
         // Base case
-        if (arr.length == 1) {
+        if (arr.length <= 1) {
             return;
         }
 
