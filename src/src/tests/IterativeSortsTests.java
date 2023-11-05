@@ -5,8 +5,7 @@ import org.junit.jupiter.api.*;
 import static iterative_sorts.Sorting.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// todo: create test cases to check number of comparisons
-public class SortTests {
+public class IterativeSortsTests {
 
     private CountingComparator<Integer> comparator;
 
