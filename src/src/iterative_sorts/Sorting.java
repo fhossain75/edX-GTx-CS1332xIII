@@ -99,7 +99,7 @@ public class Sorting {
 
             // Inner loop - Find max value in sub-array arr[:outerLoopIndex]
             int maxValueIndex = 0;
-            for(int j = 0; j <= i; j++) {
+            for(int j = 1; j <= i; j++) {
 
                 if (comparator.compare(arr[j], arr[maxValueIndex]) > 0) {
                     maxValueIndex = j;
