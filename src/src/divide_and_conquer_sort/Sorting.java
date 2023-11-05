@@ -80,35 +80,32 @@ public class Sorting {
     */
     private static <T> void merge(T[] mainArray, T[] leftArray, T[] rightArray, Comparator<T> comparator) {
 
-        int l = 0, r = 0;
+        int l = 0, r = 0, m = 0;
 
         // Merge two sub-arrays by sorting
         while (l < leftArray.length && r < rightArray.length) {
 
+            int compareVale = comparator.compare(leftArray[l], rightArray[r]);
+
             // Left sub-array element is smaller or values are equal
-            if ((comparator.compare(leftArray[l], rightArray[r]) < 0) ||
-                (comparator.compare(leftArray[l], rightArray[r]) == 0)) {
-                mainArray[l+r] = leftArray[l];
-                l++;
+            if (compareVale <= 0) {
+                mainArray[m++] = leftArray[l++];
             }
 
             // Right sub-array element smaller
             else {
-                mainArray[l+r] = rightArray[r];
-                r++;
+                mainArray[m++] = rightArray[r++];
             }
         }
 
         //  Add remaining left sub-array elements
         while (l < leftArray.length) {
-            mainArray[l+r] = leftArray[l];
-            l++;
+            mainArray[m++] = leftArray[l++];
         }
 
         //  Add remaining right sub-array elements
         while (r < rightArray.length) {
-            mainArray[l+r] = rightArray[r];
-            r++;
+            mainArray[m++] = rightArray[r++];
         }
     }
 
