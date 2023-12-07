@@ -1,3 +1,5 @@
+package avl_tree;
+
 /**
  * Node class used for implementing the AVL.
  *
