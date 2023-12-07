@@ -1,126 +1,115 @@
-//package avl_tree;
-//
-///**
-// * Your implementation of the AVL tree rotations.
-// */
-//public class AVL<T extends Comparable<? super T>> {
-//
-//    /**
-//     * DO NOT ADD ANY GLOBAL VARIABLES!
-//     */
-//
-//    /**
-//     * Updates the height and balance factor of a node using its
-//     * setter methods.
-//     *
-//     * Recall that a null node has a height of -1. If a node is not
-//     * null, then the height of that node will be its height instance
-//     * data. The height of a node is the max of its left child's height
-//     * and right child's height, plus one.
-//     *
-//     * The balance factor of a node is the height of its left child
-//     * minus the height of its right child.
-//     *
-//     * This method should run in O(1).
-//     * You may assume that the passed in node is not null.
-//     *
-//     * This method should only be called in rotateLeft(), rotateRight(),
-//     * and balance().
-//     *
-//     * @param currentNode The node to update the height and balance factor of.
-//     */
-//    public void updateHeightAndBF(AVLNode<T> currentNode) {
-//        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-//    }
-//
-//    /**
-//     * Method that rotates a current node to the left. After saving the
-//     * current's right node to a variable, the right node's left subtree will
-//     * become the current node's right subtree. The current node will become
-//     * the right node's left subtree.
-//     *
-//     * Don't forget to recalculate the height and balance factor of all
-//     * affected nodes, using updateHeightAndBF().
-//     *
-//     * This method should run in O(1).
-//     *
-//     * You may assume that the passed in node is not null and that the subtree
-//     * starting at that node is right heavy. Therefore, you do not need to
-//     * perform any preliminary checks, rather, you can immediately perform a
-//     * left rotation on the passed in node and return the new root of the subtree.
-//     *
-//     * This method should only be called in balance().
-//     *
-//     * @param currentNode The current node under inspection that will rotate.
-//     * @return The parent of the node passed in (after the rotation).
-//     */
-//    public AVLNode<T> rotateLeft(AVLNode<T> currentNode) {
-//        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-//    }
-//
-//    /**
-//     * Method that rotates a current node to the right. After saving the
-//     * current's left node to a variable, the left node's right subtree will
-//     * become the current node's left subtree. The current node will become
-//     * the left node's right subtree.
-//     *
-//     * Don't forget to recalculate the height and balance factor of all
-//     * affected nodes, using updateHeightAndBF().
-//     *
-//     * This method should run in O(1).
-//     *
-//     * You may assume that the passed in node is not null and that the subtree
-//     * starting at that node is left heavy. Therefore, you do not need to perform
-//     * any preliminary checks, rather, you can immediately perform a right
-//     * rotation on the passed in node and return the new root of the subtree.
-//     *
-//     * This method should only be called in balance().
-//     *
-//     * @param currentNode The current node under inspection that will rotate.
-//     * @return The parent of the node passed in (after the rotation).
-//     */
-//    public AVLNode<T> rotateRight(AVLNode<T> currentNode) {
-//        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-//    }
-//
-//    /**
-//     * This is the overarching method that is used to balance a subtree
-//     * starting at the passed in node. This method will utilize
-//     * updateHeightAndBF(), rotateLeft(), and rotateRight() to balance
-//     * the subtree. In part 2 of this assignment, this balance() method
-//     * will be used in your add() and remove() methods.
-//     *
-//     * The height and balance factor of the current node is first recalculated.
-//     * Based on the balance factor, a no rotation, a single rotation, or a
-//     * double rotation takes place. The current node is returned.
-//     *
-//     * You may assume that the passed in node is not null. Therefore, you do
-//     * not need to perform any preliminary checks, rather, you can immediately
-//     * check to see if any rotations need to be performed.
-//     *
-//     * This method should run in O(1).
-//     *
-//     * @param cur The current node under inspection.
-//     * @return The AVLNode that the caller should return.
-//     */
-//    public AVLNode<T> balance(AVLNode<T> currentNode) {
-//        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-//
-//        /* First, we update the height and balance factor of the current node. */
-//        updateHeightAndBF(currentNode);
-//
-//        if ( /* Condition for a right heavy tree. */ ) {
-//            if ( /* Condition for a right-left rotation. */ ) {
-//                currentNode.setRight(rotateRight(currentNode.getRight()));
-//            }
-//            currentNode = rotateLeft(currentNode);
-//        } else if ( /* Condition for a left heavy tree. */ ) {
-//            if ( /* Condition for a left-right rotation. */ ) {
-//                currentNode.setLeft(rotateLeft(currentNode.getLeft()));
-//            }
-//            currentNode = rotateRight(currentNode);
-//        }
-//
-//        return currentNode;
-//    }
-//}
+/**
+ * Node class used for implementing the AVL.
+ *
+ * DO NOT MODIFY THIS FILE!!
+ *
+ * @author CS 1332 TAs
+ * @version 1.0
+ */
+public class AVLNode<T extends Comparable<? super T>> {
+
+    private T data;
+    private AVLNode<T> left;
+    private AVLNode<T> right;
+    private int height;
+    private int balanceFactor;
+
+    /**
+     * Create an AVLNode with the given data.
+     *
+     * @param data The data stored in the new node.
+     */
+    public AVLNode(T data) {
+        this.data = data;
+    }
+
+    /**
+     * Gets the data.
+     *
+     * @return The data.
+     */
+    public T getData() {
+        return data;
+    }
+
+    /**
+     * Gets the left child.
+     *
+     * @return The left child.
+     */
+    public AVLNode<T> getLeft() {
+        return left;
+    }
+
+    /**
+     * Gets the right child.
+     *
+     * @return The right child.
+     */
+    public AVLNode<T> getRight() {
+        return right;
+    }
+
+    /**
+     * Gets the height.
+     *
+     * @return The height.
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * Gets the balance factor.
+     *
+     * @return The balance factor.
+     */
+    public int getBalanceFactor() {
+        return balanceFactor;
+    }
+
+    /**
+     * Sets the data.
+     *
+     * @param data The new data.
+     */
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    /**
+     * Sets the left child.
+     *
+     * @param left The new left child.
+     */
+    public void setLeft(AVLNode<T> left) {
+        this.left = left;
+    }
+
+    /**
+     * Sets the right child.
+     *
+     * @param right The new right child.
+     */
+    public void setRight(AVLNode<T> right) {
+        this.right = right;
+    }
+
+    /**
+     * Sets the height.
+     *
+     * @param height The new height.
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    /**
+     * Sets the balance factor.
+     *
+     * @param balanceFactor The new balance factor.
+     */
+    public void setBalanceFactor(int balanceFactor) {
+        this.balanceFactor = balanceFactor;
+    }
+}
