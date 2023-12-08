@@ -92,8 +92,17 @@ public class AVL<T extends Comparable<? super T>> {
      *
      * @param currentNode The node to update the height and balance factor of.
      */
-    private void updateHeightAndBF(AVLNode<T> node) {
-        // COPY YOUR CODE FROM PART 1 OF THE ASSIGNMENT!
+    private void updateHeightAndBF(AVLNode<T> currentNode) {
+
+        // Grab heights
+        int leftHeight = (currentNode.getLeft() != null) ? currentNode.getLeft().getHeight() : -1;
+        int rightHeight = (currentNode.getRight() != null) ? currentNode.getRight().getHeight() : -1;
+
+        // Update height
+        currentNode.setHeight(Math.max(leftHeight, rightHeight) + 1);
+
+        // Update balance factor
+        currentNode.setBalanceFactor(leftHeight - rightHeight);
     }
 
     /**
@@ -118,7 +127,17 @@ public class AVL<T extends Comparable<? super T>> {
      * @return The parent of the node passed in (after the rotation).
      */
     private AVLNode<T> rotateLeft(AVLNode<T> currentNode) {
-        // COPY YOUR CODE FROM PART 1 OF THE ASSIGNMENT!
+
+        // Rotate
+        AVLNode<T> newParentNode = currentNode.getRight();
+        currentNode.setRight(newParentNode.getLeft());
+        newParentNode.setLeft(currentNode);
+
+        // Update height and bf
+        updateHeightAndBF(currentNode);
+        updateHeightAndBF(newParentNode);
+
+        return newParentNode;
     }
 
     /**
@@ -143,7 +162,17 @@ public class AVL<T extends Comparable<? super T>> {
      * @return The parent of the node passed in (after the rotation).
      */
     private AVLNode<T> rotateRight(AVLNode<T> currentNode) {
-        // COPY YOUR CODE FROM PART 1 OF THE ASSIGNMENT!
+
+        // Rotate
+        AVLNode<T> newParentNode = currentNode.getLeft();
+        currentNode.setLeft(newParentNode.getRight());
+        newParentNode.setRight(currentNode);
+
+        // Update height and bf
+        updateHeightAndBF(currentNode);
+        updateHeightAndBF(newParentNode);
+
+        return newParentNode;
     }
 
     /**
@@ -165,7 +194,27 @@ public class AVL<T extends Comparable<? super T>> {
      * @return The AVLNode that the caller should return.
      */
     private AVLNode<T> balance(AVLNode<T> currentNode) {
-        // COPY YOUR CODE FROM PART 1 OF THE ASSIGNMENT!
+
+        updateHeightAndBF(currentNode);
+
+        // Check if node is right heavy
+        if (currentNode.getBalanceFactor() < -1) {
+            // Check if double rotation is needed (right-left)
+            if (currentNode.getRight().getBalanceFactor() >= 1) {
+                currentNode.setRight(rotateRight(currentNode.getRight()));
+            }
+            currentNode = rotateLeft(currentNode);
+
+            // Check if node is left heavy
+        } else if (currentNode.getBalanceFactor() > 1) {
+            // Check if double rotation is needed (left-right)
+            if (currentNode.getLeft().getBalanceFactor() <= -1 ) {
+                currentNode.setLeft(rotateLeft(currentNode.getLeft()));
+            }
+            currentNode = rotateRight(currentNode);
+        }
+
+        return currentNode;
     }
 
     /**

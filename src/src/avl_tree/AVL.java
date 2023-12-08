@@ -135,7 +135,6 @@ public class AVL<T extends Comparable<? super T>> {
      */
     public AVLNode<T> balance(AVLNode<T> currentNode) {
 
-        /* First, we update the height and balance factor of the current node. */
         updateHeightAndBF(currentNode);
 
         // Check if node is right heavy
