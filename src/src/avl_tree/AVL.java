@@ -147,9 +147,9 @@ public class AVL<T extends Comparable<? super T>> {
             currentNode = rotateLeft(currentNode);
 
         // Check if node is left heavy
-        } else if (currentNode.getLeft().getBalanceFactor() > 1) {
+        } else if (currentNode.getBalanceFactor() > 1) {
             // Check if double rotation is needed (left-right)
-            if (currentNode.getRight().getBalanceFactor() <= -1 ) {
+            if (currentNode.getLeft().getBalanceFactor() <= -1 ) {
                 currentNode.setLeft(rotateLeft(currentNode.getLeft()));
             }
             currentNode = rotateRight(currentNode);
