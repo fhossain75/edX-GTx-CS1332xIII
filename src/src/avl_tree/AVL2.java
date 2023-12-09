@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * Your implementation of an AVL.
  */
-public class AVL<T extends Comparable<? super T>> {
+public class AVL2<T extends Comparable<? super T>> {
 
     /*
      * Do not add new instance variables or modify existing ones.
@@ -67,8 +67,6 @@ public class AVL<T extends Comparable<? super T>> {
         return balance(currentNode);
     }
 
-    // traverse backward updating nodes bf and height
-
     /**
      * Removes and returns the element from the tree matching the given
      * parameter.
@@ -99,7 +97,91 @@ public class AVL<T extends Comparable<? super T>> {
      * @throws java.util.NoSuchElementException   If the data is not found.
      */
     public T remove(T data) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        // Error Handling: Invalid data
+        if (data == null) {
+            throw new java.lang.IllegalArgumentException("Error: Provided data is null.");
+        }
+
+        // Error Handling: Empty tree
+        if (size == 0) {
+            throw new java.lang.IllegalArgumentException("Error: Empty tree.");
+        }
+
+        AVLNode<T> returnNode = new AVLNode<T>(null);
+
+        root = rRemove(root, data, returnNode);
+
+        return returnNode.getData();
+    }
+
+    private AVLNode<T> rRemove(AVLNode<T> currentNode, T data, AVLNode<T> returnData) {
+
+        // Error Handling: Data doesn't exist in tree
+        if (currentNode == null) {
+            throw new NoSuchElementException("Error: Data does not exist in tree.");
+        }
+
+        // Current value is larger than data value, traverse to left node
+        else if ((currentNode.getData().compareTo(data)) > 0) {
+            currentNode.setLeft(rRemove(currentNode.getLeft(), data, returnData));
+        }
+
+        // Current value is smaller than data value, Add left
+        else if ((currentNode.getData().compareTo(data)) < 0) {
+            currentNode.setRight(rRemove(currentNode.getRight(), data, returnData));
+        }
+
+        // Base case: Found position of data value
+        else if ((currentNode.getData().compareTo(data)) == 0) {
+            size--;
+            returnData.setData(currentNode.getData());
+
+            // Case 1: Leaf Node
+            if (currentNode.getLeft() == null && currentNode.getRight() == null) {
+                return null;
+            }
+
+            // Case 2: One Child Node
+            else if (currentNode.getLeft() != null && currentNode.getRight() == null) {
+                return currentNode.getLeft();
+            }
+
+            else if (currentNode.getLeft() == null && currentNode.getRight() != null) {
+                return currentNode.getRight();
+            }
+
+            // Case 3: Two Child Node - successor
+            else {
+                AVLNode<T> dummyNode = new AVLNode<T>(null);
+                // Set right nodes
+                currentNode.setRight(removeSuccessor(currentNode.getRight(), dummyNode));
+                // Replace the current node's value with the successor value
+                currentNode.setData(dummyNode.getData());
+            }
+        }
+
+        updateHeightAndBF(currentNode);
+        return balance(currentNode);
+    }
+
+    private AVLNode<T> removeSuccessor(AVLNode<T> currentNode, AVLNode<T> dummy) {
+
+        // Base Case - Find last left node
+        if (currentNode.getLeft() == null) {
+            dummy.setData(currentNode.getData());
+            // Removes the current node from the tree,
+            // making the right child None or another subtree
+            return currentNode.getRight();
+        }
+
+        else {
+            // Add nodes
+            currentNode.setLeft(removeSuccessor(currentNode.getLeft(), dummy));
+        }
+
+        updateHeightAndBF(currentNode);
+        return balance(currentNode);
     }
 
     /**
