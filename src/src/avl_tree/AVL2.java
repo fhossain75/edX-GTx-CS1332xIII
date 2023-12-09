@@ -36,8 +36,38 @@ public class AVL<T extends Comparable<? super T>> {
      * @throws java.lang.IllegalArgumentException If data is null.
      */
     public void add(T data) {
-        // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+
+        // Error Handling: Invalid data
+        if (data == null) {
+            throw new java.lang.IllegalArgumentException("Error: Provided data is null.");
+        }
+
+        root = rAdd(root, data);
     }
+
+    private AVLNode<T> rAdd(AVLNode<T> currentNode, T data) {
+
+        // Base case: Found position where to add data
+        if (currentNode == null) {
+            size++;
+            return new AVLNode<T>(data);
+        }
+
+        // Current value is larger than data value, traverse to left node
+        else if ((currentNode.getData().compareTo(data)) > 0) {
+            currentNode.setLeft(rAdd(currentNode.getLeft(), data));
+        }
+
+        // Current value is smaller than data value, traverse to right node
+        else if ((currentNode.getData().compareTo(data)) < 0) {
+            currentNode.setRight(rAdd(currentNode.getRight(), data));
+        }
+
+        updateHeightAndBF(currentNode);
+        return balance(currentNode);
+    }
+
+    // traverse backward updating nodes bf and height
 
     /**
      * Removes and returns the element from the tree matching the given
